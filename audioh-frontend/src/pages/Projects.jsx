@@ -212,7 +212,12 @@ function Projects() {
   }
 
   return (
+    <div>
+      <div className="logo-container">
+        <img src = "src\assets\Logo_White.png"/>
+      </div>
     <div className="projects-container" >
+      
       {/* Section 1: 25% width */}
       <div className="section-1">
         <QuickScribe 
@@ -307,7 +312,7 @@ function Projects() {
                       className="add-note-button"
                       onClick={() => handleEditNote(file.id, '')}
                     >
-                      Add Note
+                      A D D  N O T E
                     </button>
                   )}
                 </div>
@@ -327,9 +332,10 @@ function Projects() {
 
       {/* Section 3: 30% width */}
       <div className="section-3">
-        <button className="action-button">Summary</button>
-        <button className="action-button">Download</button>
+        <button className="action-button">S U M M A R Y</button>
+        <button className="action-button">D O W N L O A D</button>
       </div>
+    </div>
     </div>
   );
 }

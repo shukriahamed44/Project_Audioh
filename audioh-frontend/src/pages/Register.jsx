@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Register.css'; // Assuming you have a CSS file for styling
+
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -32,11 +34,12 @@ const Register = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
+    <div className='register-wrapper'>
+      <div className='register-card'>
+      <h2 className="register-title">Create new account</h2>
       {error && <div>{error}</div>}
       {success && <div>{success}</div>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="login-form">
         <input 
           type="text" 
           placeholder="Username" 
@@ -55,8 +58,9 @@ const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Register</button>
+        <button type="submit">R E G I S T E R</button>
       </form>
+    </div>
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './Login.css'; // Assuming you have a CSS file for styling
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -35,10 +36,11 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      {error && <div style={{color: 'red'}}>{error}</div>}
-      <form onSubmit={handleSubmit}>
+    <div className = 'login-wrapper'>
+    <div className='login-card'>
+      <h2 className = 'login-title'>Already have an account?</h2>
+      {error && <div className = "login-error ">{error}</div>}
+      <form onSubmit={handleSubmit} className="login-form">
         <input 
           type="text" 
           placeholder="Username" 
@@ -53,8 +55,9 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button type="submit">Login</button>
+        <button type="submit">L O G I N</button>
       </form>
+    </div>
     </div>
   );
 };

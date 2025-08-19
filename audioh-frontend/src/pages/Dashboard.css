@@ -1,21 +1,49 @@
 .dashboard {
-  padding: 20px;
-  min-height: 100vh;
+  padding: 0px;
+  justify-items: center;
+  width: 90vw;
+  height: 90vh;
+  border-radius: 20px;
+  margin: 1px 10px 10px 50px;
+  background-color: #1c1c1c
 }
 
 .header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  width: 90vw;
+  height: 270px;
+  /* justify-content: space-between; */
+  border-radius: 20px;
+  background: linear-gradient(55deg, #ff6f00, #ff4d00);
+  
   margin-bottom: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #eee;
+  padding-top: 0px;
+  color: #1c1c1c;
+  img {
+    width: 260px;
+    height: auto;
+    margin-top: 35px;
+    padding-top: 0px;
+    margin-left: 50px;
+    justify-items: flex-start;
+  }
+}
+.dash-header {
+  display: flex;
+  flex-direction: row;
+  
+  padding: 0 50px;
+  margin-top: 20px;
 }
 
 .user-info {
   display: flex;
   align-items: center;
-  gap: 15px;
+  
+  margin-left: 0px;
+  font-size: 59px;
 }
 
 .user-info span {
@@ -42,8 +70,8 @@
 
 .create-project-form button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
+  background: linear-gradient(55deg, #ff6f00, #ff4d00);
+  color: rgb(33, 33, 33);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -61,32 +89,35 @@
 }
 
 .project-card {
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  
+  border-radius: 10px;
   padding: 20px;
-  background-color: #f9f9f9;
+  background-color: #2e2e2e;
+  
 }
 
 .project-card h3 {
-  margin: 0 0 10px 0;
-  color: #333;
+  margin: 0 0 0px 0;
+  color: #ffffff;
+
 }
 
 .project-card p {
-  margin: 5px 0;
+  margin: 0px 0;
   color: #666;
+  font-size: 11px;
 }
 
 .project-card button {
   margin-top: 10px;
   padding: 8px 16px;
-  background-color: #28a745;
-  color: white;
+  background: linear-gradient(55deg, #ff6f00, #ff4d00);
+  color: rgb(44, 44, 44);
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .project-card button:hover {
-  background-color: #218838;
+  background-color: #0500a4;
 }

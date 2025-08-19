@@ -1,0 +1,22 @@
+.welcome-container {
+    
+    padding: 20px 20px 100px 20px;
+    margin: 40px;
+  width: 90vw;
+  height: 80vh;
+  background: linear-gradient(55deg, #ff425e, #ff7409);
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+
+   img {
+    width: auto;
+    height: 150px;
+    margin-left: 100px;
+    margin-top: 80px;
+  }
+}
+  
+
+
+  

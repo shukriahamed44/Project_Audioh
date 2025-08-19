@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Dashboard.css'; // Assuming you have a CSS file for styling
+import '../App.css';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -134,13 +136,15 @@ const Dashboard = () => {
   }
 
   return (
-    <div className="dashboard">
+    <div className="dashboard" style={{ justifySelf: 'center' }}>
       <div className="header">
-        <h1>Dashboard</h1>
-        <div className="user-info">
-          <span>Welcome, {user}!</span>
-          <button onClick={handleLogout}>Logout</button>
-        </div>
+        <img src = "src\assets\Logo_White.png"/>
+        <div className="dash-header">
+          <div className="user-info">
+            <span >Welcome, {user}!</span>
+          </div>
+          <button style={{ justifyItems: 'flex-end', background: 'transparent', height: '30px' }} onClick={handleLogout}>L O G O U T</button>
+          </div>
       </div>
       
       <div className="projects-section">
