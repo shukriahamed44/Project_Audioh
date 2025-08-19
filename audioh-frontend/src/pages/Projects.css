@@ -1,0 +1,281 @@
+.projects-container {
+  display: flex;
+  height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.section-1 {
+  width: 25%;
+  padding-right: 20px;
+  border-right: 1px solid #eee;
+}
+
+.section-2 {
+  width: 40%;
+  padding: 0 20px;
+}
+
+.section-3 {
+  width: 30%;
+  padding-left: 20px;
+  border-left: 1px solid #eee;
+}
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.bento-card {
+  border: 3px solid transparent;  /* existing gradient border or just spacing */
+  border-radius: 18px;            /* rounded corners */
+  padding: 20px;                  /* inner spacing */
+  background-color: #2b2b2b;      /* card background */
+  position: relative;
+  
+  /* Simple solid-color glow */
+  box-shadow: 
+    0 0 5px #000000,   /* horizontal offset 0, vertical offset 0, blur 10px, color cyan */
+    0 0 20px #000000;   /* horizontal offset 0, vertical offset 0, blur 20px, color cyan */
+}
+
+.file-name {
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #292929 0;
+  border-radius: 4px;
+  font-size: 24px;
+  word-break: break-all;
+}
+
+.transcription-preview {
+  margin-bottom: 15px;
+}
+
+.expand-button {
+  background: linear-gradient(55deg, #ff6f00, #ff4d00);
+  color: rgb(25, 25, 25);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.expand-button:hover {
+  background-color: #0056b3;
+}
+
+.transcription-expanded {
+  background-color: #1c1c1c;
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  max-height: 200px;
+  overflow-y: auto;
+  border: 0px solid #dee2e6;
+}
+
+.transcription-expanded p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.notes-section {
+  margin-bottom: 15px;
+}
+
+.notes-display {
+  margin-bottom: 10px;
+}
+
+.notes-text {
+  margin: 0 0 10px 0;
+  padding: 10px;
+  color: #ff6f00;
+  background-color: #1a1a1a;
+  border: 0px solid #ddd;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  font-size: 14px;
+}
+
+.notes-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-note-button, .delete-note-button {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.edit-note-button {
+  background: linear-gradient(55deg, #ff6f00, #ff4d00);
+  color: rgb(26, 26, 26);
+  font-size: 14px;
+}
+
+.delete-note-button {
+  background: linear-gradient(55deg, #ff6f00, #ff4d00);
+  color: rgb(26, 26, 26);
+  border-radius: 12px;
+}
+
+.notes-edit {
+  margin-bottom: 10px;
+}
+
+.note-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  resize: vertical;
+}
+
+.note-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.save-note-button, .cancel-note-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.save-note-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.cancel-note-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.add-note-button {
+  background-color: #ffc107;
+  color: #212529;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+.add-note-button:hover {
+  background-color: #e0a800;
+}
+
+.card-button {
+  margin: 5px 0;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  width: 100%;
+}
+
+.delete-button {
+  background: linear-gradient(55deg, #ff6f00, #ff4d00);
+  color: rgb(22, 22, 22);
+}
+
+.delete-button:hover {
+  background-color: #c82333;
+}
+
+.no-files-message {
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.action-button {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+}
+
+.Quickscribe-container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+}
+
+.Quickscribe-container h1 {
+  margin-top: 0;
+  color: #333;
+}
+
+.file-input {
+  margin-bottom: 15px;
+}
+
+.file-input input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.upload-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload-button:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.upload-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.transcription-result {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #e9f7ef;
+  border-radius: 4px;
+  border: 1px solid #d4edda;
+}
+
+.transcription-result h2 {
+  margin-top: 0;
+  color: #155724;
+}
+
+.transcription-result p {
+  margin: 0;
+  line-height: 1.5;
+}
