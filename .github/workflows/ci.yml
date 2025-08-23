@@ -12,7 +12,7 @@ jobs:
     # Set the default directory for the backend job
     defaults:
       run:
-        working-directory: audio # <<< CHANGE THIS
+        working-directory: audio/audio # <<< CHANGE THIS
 
     steps:
     - name: Checkout code
