@@ -12,7 +12,7 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, '/api')
       }
     }
-  }
+  }, // <--- ADD THIS MISSING COMMA HERE
 
   build: {
     rollupOptions: {
