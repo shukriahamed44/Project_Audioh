@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './Register.css'; // Assuming you have a CSS file for styling
+import './Register.css'; 
 
 
 const Register = () => {
@@ -41,18 +41,21 @@ const Register = () => {
       {success && <div>{success}</div>}
       <form onSubmit={handleSubmit} className="login-form">
         <input 
+        name = "username"
           type="text" 
           placeholder="Username" 
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
         <input 
+        name = "email"
           type="email" 
           placeholder="Email" 
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
         <input 
+          name = "password"
           type="password" 
           placeholder="Password" 
           value={password}

@@ -17,14 +17,14 @@ const Login = () => {
         password
       });
       
-      // Store user session with user ID from backend response
-      localStorage.setItem('user', username);
+      // Store user session with user ID from backend response // to proceed on with Welcome, ....thing* 
+      localStorage.setItem('user', username); 
       
-      // IMPORTANT: Get and store the actual user ID from backend
+      // Get and store the actual user ID from backend
       if (response.data && response.data.userId) {
         localStorage.setItem('userId', response.data.userId.toString());
       } else {
-        // Fallback for testing (but this shouldn't happen in production)
+        //sendingn i n user id
         localStorage.setItem('userId');
       }
       
@@ -42,6 +42,7 @@ const Login = () => {
       {error && <div className = "login-error ">{error}</div>}
       <form onSubmit={handleSubmit} className="login-form">
         <input 
+          name = "username"
           type="text" 
           placeholder="Username" 
           value={username}
@@ -49,6 +50,7 @@ const Login = () => {
           required
         />
         <input 
+          name = "password"
           type="password" 
           placeholder="Password" 
           value={password}
