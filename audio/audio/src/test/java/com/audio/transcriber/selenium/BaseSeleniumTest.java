@@ -15,7 +15,14 @@ public class BaseSeleniumTest {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
+
+        // CRITICAL: Add these for GitHub Actions CI environment
+        options.addArguments("--headless"); // Run without GUI
+        options.addArguments("--no-sandbox"); // Required for CI
+        options.addArguments("--disable-dev-shm-usage"); // Prevent memory issues
+        options.addArguments("--remote-allow-origins=*"); // Fix session creation error
+        options.addArguments("--user-data-dir=/tmp/chrome-user-data-" + System.currentTimeMillis()); // Unique directory
+
         options.addArguments("--disable-blink-features=AutomationControlled");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
         options.setExperimentalOption("useAutomationExtension", false);
