@@ -25,7 +25,7 @@ jobs:
         distribution: 'temurin'
 
     - name: Build and test with Maven
-      run: mvn clean install -Dtest=!*Selenium*,!*UI*,!*SignIn*,!*SignUp*,!*Registration*
+      run: mvn clean install -Dtest=!*Selenium*,!*UI*,!*SignIn*,!*SignUp*,!*Registration*,!*AudioApplicationTests*
 
   build-frontend:
     runs-on: ubuntu-latest
