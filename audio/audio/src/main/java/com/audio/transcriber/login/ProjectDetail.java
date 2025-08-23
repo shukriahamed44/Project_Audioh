@@ -21,8 +21,8 @@ public class ProjectDetail {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    // Add this annotation to break the circular reference
-    @JsonIgnoreProperties({"projectDetail"}) // This prevents Project from serializing projectDetail
+
+    @JsonIgnoreProperties({"projectDetail"})
     @OneToMany(mappedBy = "projectDetail", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Project> projects;
 

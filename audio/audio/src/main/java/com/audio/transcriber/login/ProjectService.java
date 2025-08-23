@@ -14,6 +14,11 @@ public class ProjectService {
     @Autowired
     private ProjectRepository projectRepository;
 
+    /// constructor
+    public ProjectService(ProjectDetailRepository projectDetailRepository, ProjectRepository projectRepository) {
+    }
+
+
     public List<ProjectDetail> getUserProjects(Long userId) {
         return projectDetailRepository.findByUserId(userId);
     }

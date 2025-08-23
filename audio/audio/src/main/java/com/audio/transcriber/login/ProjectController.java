@@ -28,6 +28,11 @@ public class ProjectController {
         return ResponseEntity.ok(project);
     }
 
+    @PostMapping("/create-project")
+    public ResponseEntity<String> createProject(@RequestParam String name, @RequestParam Long userId) {
+        return ResponseEntity.ok("Project created");
+    }
+
     @PostMapping("/add-file")
     public ResponseEntity<Project> addProjectFile(@RequestBody AddFileRequest request) {
         System.out.println("Received request: projectId=" + request.getProjectId() +
