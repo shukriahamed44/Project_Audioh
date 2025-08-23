@@ -10,7 +10,7 @@ import java.time.Duration;
 public class BaseSeleniumTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
-//testcomment
+
     public void setUp() {
         WebDriverManager.chromedriver().setup();
 
