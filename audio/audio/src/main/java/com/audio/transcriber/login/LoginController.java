@@ -23,7 +23,7 @@ public class LoginController {
             return ResponseEntity.badRequest().body("Username or email already exists");
         }
     }
-
+    //test comment
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         var user = loginService.loginUser(loginRequest);
