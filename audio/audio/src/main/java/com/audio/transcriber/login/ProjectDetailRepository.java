@@ -8,3 +8,5 @@ import java.util.List;
 public interface ProjectDetailRepository extends JpaRepository<ProjectDetail, Long> {
     List<ProjectDetail> findByUserId(Long userId);
 }
+
+//sample comment
