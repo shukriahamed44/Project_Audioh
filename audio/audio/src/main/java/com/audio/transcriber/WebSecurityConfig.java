@@ -16,6 +16,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .securityMatcher("/api/**") //REMOVE at code red
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable()) // disable CSRF if your API is stateless
                 .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); // customize as needed
