@@ -6,13 +6,13 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/shukriahamed44/Project_Audioh.git',
-                    credentialsId: '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'   // <-- THIS MUST BE YOUR PAT CREDENTIAL ID
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         git branch: 'main',
+        //             url: 'https://github.com/shukriahamed44/Project_Audioh.git',
+        //             credentialsId: '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'   // <-- THIS MUST BE YOUR PAT CREDENTIAL ID
+        //     }
+        // }
 
         stage('Build Backend Docker Image') {
             steps {
