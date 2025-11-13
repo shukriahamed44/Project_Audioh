@@ -1,4 +1,4 @@
-version: "3.9"
+
 services:
   db:
     image: mysql:8.0
@@ -46,7 +46,7 @@ services:
       SPRING_SERVLET_MULTIPART_MAX_REQUEST_SIZE: 5MB
       SERVER_PORT: 8080
     ports:
-      - "8080:8080"
+      - "8081:8080"
     depends_on:
       - db
 
