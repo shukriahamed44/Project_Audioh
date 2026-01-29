@@ -1,0 +1,77 @@
+---
+- name: Deploy Project Audio
+  hosts: all
+  become: yes
+  vars:
+    docker_compose_file: "docker-compose.prod.yml"
+    remote_dest: "/home/ubuntu/docker-compose.yml"
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: Install dependencies
+      apt:
+        name:
+          - ca-certificates
+          - curl
+          - gnupg
+        state: present
+
+    - name: Add Docker GPG key
+      shell: |
+        install -m 0755 -d /etc/apt/keyrings
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+        chmod a+r /etc/apt/keyrings/docker.asc
+      args:
+        creates: /etc/apt/keyrings/docker.asc
+
+    - name: Add Docker repository
+      shell: |
+        echo \
+          "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+          $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+          tee /etc/apt/sources.list.d/docker.list > /dev/null
+      args:
+        creates: /etc/apt/sources.list.d/docker.list
+
+    - name: Install Docker
+      apt:
+        update_cache: yes
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    - name: Ensure Docker is running
+      systemd:
+        name: docker
+        state: started
+        enabled: yes
+
+    - name: Copy docker-compose file
+      copy:
+        src: "{{ docker_compose_file }}"
+        dest: "{{ remote_dest }}"
+        mode: '0644'
+
+    - name: Log into Docker Hub
+      shell: "echo {{ dockerhub_password }} | docker login -u {{ dockerhub_username }} --password-stdin"
+      register: docker_login_result
+      changed_when: false
+      no_log: true
+
+    - name: Pull latest images
+      shell: docker compose pull
+      args:
+        chdir: /home/ubuntu
+
+    - name: Start Docker Compose
+      shell: docker compose up -d
+      args:
+        chdir: /home/ubuntu

@@ -2,17 +2,20 @@ pipeline {
     agent any
 
     environment {
-        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')  // your Docker Hub credentials ID
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub-creds')
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+        AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+        ANSIBLE_HOST_KEY_CHECKING = 'False'
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/shukriahamed44/Project_Audioh.git',
-                    credentialsId: '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'   // <-- THIS MUST BE YOUR PAT CREDENTIAL ID
-            }
-        }
+        // stage('Checkout') {
+        //     steps {
+        //         git branch: 'main',
+        //             url: 'https://github.com/shukriahamed44/Project_Audioh.git',
+        //             credentialsId: 'github-pat-creds'
+        //     }
+        // }
 
         stage('Build Backend Docker Image') {
             steps {
@@ -40,6 +43,37 @@ pipeline {
                     sh "docker push shukriahamed44/project_audio_frontend:latest"
                 }
             }
+        }
+
+        stage('Provision Infrastructure') {
+            steps {
+                dir('infrastructure/terraform') {
+                    sh 'terraform init'
+                    sh 'terraform apply -auto-approve'
+                }
+            }
+        }
+
+        stage('Deploy to Production') {
+            steps {
+                script {
+                    def public_ip = sh(script: "terraform -chdir=infrastructure/terraform output -raw instance_public_ip", returnStdout: true).trim()
+                    
+                    // Wait for SSH to be ready
+                    sleep 60 
+
+                    dir('infrastructure/ansible') {
+                        sh "chmod 400 ../terraform/project_audio_key.pem"
+                        sh "ansible-playbook -i '${public_ip},' -u ubuntu --private-key ../terraform/project_audio_key.pem -e 'dockerhub_password=$DOCKERHUB_CREDENTIALS_PSW dockerhub_username=$DOCKERHUB_CREDENTIALS_USR' deploy.yml"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        always {
+            sh "docker logout"
         }
     }
 }

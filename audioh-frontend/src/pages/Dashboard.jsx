@@ -33,14 +33,14 @@ const Dashboard = () => {
     try {
       setLoading(true);
       console.log('Loading projects for user ID:', userId);
-      
-      const response = await axios.get(`http://localhost:8080/api/projects/user/${userId}`);
-      
+
+      const response = await axios.get(`http://localhost:8081/api/projects/user/${userId}`);
+
       console.log('Raw response from backend:', response.data);
-      
+
       // Handle different response structures
       let projectsData = [];
-      
+
       if (Array.isArray(response.data)) {
         projectsData = response.data;
         console.log('Direct array response:', projectsData);
@@ -62,19 +62,19 @@ const Dashboard = () => {
           });
         }
       }
-      
+
       // Filter to ensure valid project objects
-      const validProjects = projectsData.filter(item => 
-        item && 
-        typeof item === 'object' && 
-        item.id !== undefined && 
+      const validProjects = projectsData.filter(item =>
+        item &&
+        typeof item === 'object' &&
+        item.id !== undefined &&
         item.projectName !== undefined &&
         item.userId !== undefined
       );
-      
+
       console.log('Final projects array:', validProjects);
       setProjects(validProjects);
-      
+
     } catch (err) {
       console.error('Error loading projects:', err);
       setError('Failed to load projects');
@@ -93,19 +93,19 @@ const Dashboard = () => {
   const handleCreateProject = async (e) => {
     e.preventDefault();
     if (!newProjectName.trim()) return;
-    
+
     try {
       const userId = localStorage.getItem('userId');
       if (!userId) {
         setError('User not authenticated');
         return;
       }
-      
-      const response = await axios.post('http://localhost:8080/api/projects/create', {
+
+      const response = await axios.post('http://localhost:8081/api/projects/create', {
         userId: parseInt(userId),
         projectName: newProjectName
       });
-      
+
       // Add new project to the list
       setProjects(prev => {
         const exists = prev.some(p => p.id === response.data.id);
@@ -114,7 +114,7 @@ const Dashboard = () => {
         }
         return prev;
       });
-      
+
       setNewProjectName('');
     } catch (error) {
       console.error('Error creating project:', error);
@@ -138,18 +138,18 @@ const Dashboard = () => {
   return (
     <div className="dashboard" style={{ justifySelf: 'center' }}>
       <div className="header">
-        <img src = "src\assets\Logo_White.png"/>
+        <img src="src\assets\Logo_White.png" />
         <div className="dash-header">
           <div className="user-info">
             <span >Welcome, {user}!</span>
           </div>
           <button style={{ justifyItems: 'flex-end', background: 'transparent', height: '30px' }} onClick={handleLogout}>L O G O U T</button>
-          </div>
+        </div>
       </div>
-      
+
       <div className="projects-section">
         <h2>Your Projects</h2>
-        
+
         <form onSubmit={handleCreateProject} className="create-project-form">
           <input
             type="text"
@@ -160,7 +160,7 @@ const Dashboard = () => {
           />
           <button type="submit">Create Project</button>
         </form>
-        
+
         {Array.isArray(projects) && projects.length > 0 ? (
           <div className="projects-grid">
             {projects.map(project => {
@@ -168,7 +168,7 @@ const Dashboard = () => {
                 console.warn('Skipping invalid project:', project);
                 return null;
               }
-              
+
               return (
                 <div key={project.id} className="project-card">
                   <h3>{project.projectName}</h3>

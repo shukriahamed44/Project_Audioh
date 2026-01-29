@@ -18,14 +18,14 @@ const QuickScribe = ({ onAddFile }) => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:8080/api/transcribe', formData, {
+      const response = await axios.post('http://localhost:8081/api/transcribe', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
       });
       setTranscription(response.data);
       console.log("Transcription successful:");
-      
+
       // Pass transcription back to parent component
       if (onAddFile) {
         onAddFile(response.data);
@@ -47,13 +47,13 @@ const QuickScribe = ({ onAddFile }) => {
   };
 
   return (
-    <div className="Quickscribe-container"> 
+    <div className="Quickscribe-container">
       <h1>Add files here</h1>
       <div className="file-input">
         <input type="file" accept="audio/*" onChange={handleFileChange} />
       </div>
-      <button 
-        className="upload-button" 
+      <button
+        className="upload-button"
         onClick={handleUpload}
         disabled={!file || isTranscribing}
       >

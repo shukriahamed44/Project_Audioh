@@ -12,14 +12,14 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      const response = await axios.post('http://localhost:8081/api/auth/login', {
         username,
         password
       });
-      
+
       // Store user session with user ID from backend response // to proceed on with Welcome, ....thing* 
-      localStorage.setItem('user', username); 
-      
+      localStorage.setItem('user', username);
+
       // Get and store the actual user ID from backend
       if (response.data && response.data.userId) {
         localStorage.setItem('userId', response.data.userId.toString());
@@ -27,7 +27,7 @@ const Login = () => {
         //sendingn i n user id
         localStorage.setItem('userId');
       }
-      
+
       navigate('/dashboard');
     } catch (err) {
       // Better error handling - show actual error from server
@@ -36,30 +36,30 @@ const Login = () => {
   };
 
   return (
-    <div className = 'login-wrapper'>
-    <div className='login-card'>
-      <h2 className = 'login-title'>Already have an account?</h2>
-      {error && <div className = "login-error ">{error}</div>}
-      <form onSubmit={handleSubmit} className="login-form">
-        <input 
-          name = "username"
-          type="text" 
-          placeholder="Username" 
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <input 
-          name = "password"
-          type="password" 
-          placeholder="Password" 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">L O G I N</button>
-      </form>
-    </div>
+    <div className='login-wrapper'>
+      <div className='login-card'>
+        <h2 className='login-title'>Already have an account?</h2>
+        {error && <div className="login-error ">{error}</div>}
+        <form onSubmit={handleSubmit} className="login-form">
+          <input
+            name="username"
+            type="text"
+            placeholder="Username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          <input
+            name="password"
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">L O G I N</button>
+        </form>
+      </div>
     </div>
   );
 };

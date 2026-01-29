@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from 'react';
 //import './QuickScribe.css'; // Assuming you have a CSS file for styling
 import axios from 'axios';
 
@@ -19,7 +19,7 @@ const QuickScribe = () => {
         formData.append('file', file);
 
         try {
-            const response = await axios.post('https://localhost:8080', formData,{
+            const response = await axios.post('https://localhost:8081', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 }
@@ -32,15 +32,15 @@ const QuickScribe = () => {
 
 
 
-    return(
-        <div className ="Quickscribe-container">
+    return (
+        <div className="Quickscribe-container">
             <h1>Add files here</h1>
-            <div className = "file-input">
-                <input type= "file" accept="audio/*" on onChange={handleFileChange}/>
+            <div className="file-input">
+                <input type="file" accept="audio/*" on onChange={handleFileChange} />
             </div>
-            <button className ="upload-button" onClick = {handleUpload}>Upload and Transcribe</button>
+            <button className="upload-button" onClick={handleUpload}>Upload and Transcribe</button>
 
-            <div className = "transcription-result">
+            <div className="transcription-result">
                 <h2>Transcription Result</h2>
                 <p>{transcription}</p>
             </div>
