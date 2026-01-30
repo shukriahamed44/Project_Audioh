@@ -1,0 +1,25 @@
+# Build results
+target/
+build/
+out/
+
+# Dependencies
+.mvn/wrapper/maven-wrapper.properties
+
+# IDE/Editor
+.idea/
+.vscode/
+*.swp
+*.iml
+
+# Logs
+*.log
+logs/
+
+# Git
+.git/
+.gitignore
+
+# Misc
+.DS_Store
+HELP.md
