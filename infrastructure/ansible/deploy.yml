@@ -6,6 +6,15 @@
     docker_compose_file: "docker-compose.prod.yml"
     remote_dest: "/home/ubuntu/docker-compose.yml"
 
+  pre_tasks:
+    - name: Wait for system to become reachable
+      wait_for_connection:
+        delay: 10
+        timeout: 300
+
+    - name: Gather facts after connection
+      setup:
+
   tasks:
     - name: Update apt cache
       apt:
@@ -54,10 +63,18 @@
         state: started
         enabled: yes
 
+    - name: Add ubuntu user to docker group
+      user:
+        name: ubuntu
+        groups: docker
+        append: yes
+
     - name: Copy docker-compose file
       copy:
         src: "{{ docker_compose_file }}"
         dest: "{{ remote_dest }}"
+        owner: ubuntu
+        group: ubuntu
         mode: '0644'
 
     - name: Log into Docker Hub
@@ -66,12 +83,30 @@
       changed_when: false
       no_log: true
 
+    - name: Stop existing containers (if any)
+      shell: docker compose down --remove-orphans
+      args:
+        chdir: "{{ remote_dest | dirname }}"
+      ignore_errors: yes
+
     - name: Pull latest images
       shell: docker compose pull
       args:
-        chdir: /home/ubuntu
+        chdir: "{{ remote_dest | dirname }}"
 
     - name: Start Docker Compose
       shell: docker compose up -d
       args:
-        chdir: /home/ubuntu
+        chdir: "{{ remote_dest | dirname }}"
+
+    - name: Wait for containers to start
+      pause:
+        seconds: 15
+
+    - name: Verify running containers
+      shell: docker ps
+      register: docker_output
+
+    - name: Show running containers
+      debug:
+        var: docker_output.stdout_lines

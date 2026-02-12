@@ -49,6 +49,7 @@ pipeline {
             steps {
                 dir('infrastructure/terraform') {
                     sh 'terraform init'
+                    sh 'terraform plan'
                     sh 'terraform apply -auto-approve'
                 }
             }
@@ -58,8 +59,11 @@ pipeline {
             steps {
                 script {
                     def public_ip = sh(script: "terraform -chdir=infrastructure/terraform output -raw instance_public_ip", returnStdout: true).trim()
+                    echo "========================================"
+                    echo "DEPLOYING TO IP: ${public_ip}"
+                    echo "========================================"
                     
-                    // Wait for SSH to be ready
+                    // Wait for SSH to be ready on fresh instance
                     sleep 60 
 
                     dir('infrastructure/ansible') {
