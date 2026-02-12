@@ -2,6 +2,7 @@
 - name: Deploy Project Audio
   hosts: all
   become: yes
+  gather_facts: no
   vars:
     docker_compose_file: "docker-compose.prod.yml"
     remote_dest: "/home/ubuntu/docker-compose.yml"

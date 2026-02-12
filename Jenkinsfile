@@ -68,7 +68,14 @@ pipeline {
 
                     dir('infrastructure/ansible') {
                         sh "chmod 400 ../terraform/project_audio_key.pem"
-                        sh "ansible-playbook -i '${public_ip},' -u ubuntu --private-key ../terraform/project_audio_key.pem -e 'dockerhub_password=$DOCKERHUB_CREDENTIALS_PSW dockerhub_username=$DOCKERHUB_CREDENTIALS_USR' deploy.yml"
+                        withEnv(["TARGET_IP=${public_ip}"]) {
+                            sh '''ansible-playbook \
+                                -i "${TARGET_IP}," \
+                                -u ubuntu \
+                                --private-key ../terraform/project_audio_key.pem \
+                                -e "dockerhub_password=${DOCKERHUB_CREDENTIALS_PSW} dockerhub_username=${DOCKERHUB_CREDENTIALS_USR}" \
+                                deploy.yml'''
+                        }
                     }
                 }
             }
