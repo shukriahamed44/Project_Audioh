@@ -70,6 +70,9 @@
         groups: docker
         append: yes
 
+    - name: Reset SSH connection to pick up new group
+      meta: reset_connection
+
     - name: Copy docker-compose file
       copy:
         src: "{{ docker_compose_file }}"
@@ -79,23 +82,27 @@
         mode: '0644'
 
     - name: Log into Docker Hub
+      become: no
       shell: "echo {{ dockerhub_password }} | docker login -u {{ dockerhub_username }} --password-stdin"
       register: docker_login_result
       changed_when: false
       no_log: true
 
     - name: Stop existing containers (if any)
+      become: no
       shell: docker compose down --remove-orphans
       args:
         chdir: "{{ remote_dest | dirname }}"
       ignore_errors: yes
 
     - name: Pull latest images
+      become: no
       shell: docker compose pull
       args:
         chdir: "{{ remote_dest | dirname }}"
 
     - name: Start Docker Compose
+      become: no
       shell: docker compose up -d
       args:
         chdir: "{{ remote_dest | dirname }}"
@@ -105,9 +112,11 @@
         seconds: 15
 
     - name: Verify running containers
+      become: no
       shell: docker ps
       register: docker_output
 
     - name: Show running containers
+      become: no
       debug:
         var: docker_output.stdout_lines
