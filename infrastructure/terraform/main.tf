@@ -14,6 +14,23 @@ data "aws_ami" "ubuntu" {
   owners = ["099720109477"] # Canonical
 }
 
+# Ensure we use the default VPC and a public subnet
+data "aws_vpc" "default" {
+  default = true
+}
+
+data "aws_subnets" "default" {
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+
+  filter {
+    name   = "default-for-az"
+    values = ["true"]
+  }
+}
+
 resource "tls_private_key" "pk" {
   algorithm = "RSA"
   rsa_bits  = 4096
@@ -33,6 +50,7 @@ resource "local_file" "ssh_key" {
 resource "aws_security_group" "app_sg" {
   name        = "project_audio_sg"
   description = "Allow inbound traffic for Project Audio"
+  vpc_id      = data.aws_vpc.default.id
 
   ingress {
     description = "SSH"
@@ -75,9 +93,11 @@ resource "aws_security_group" "app_sg" {
 }
 
 resource "aws_instance" "app_server" {
-  ami           = data.aws_ami.ubuntu.id
-  instance_type = var.instance_type
-  key_name      = aws_key_pair.kp.key_name
+  ami                         = data.aws_ami.ubuntu.id
+  instance_type               = var.instance_type
+  key_name                    = aws_key_pair.kp.key_name
+  subnet_id                   = data.aws_subnets.default.ids[0]
+  associate_public_ip_address = true
 
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
@@ -85,3 +105,4 @@ resource "aws_instance" "app_server" {
     Name = "ProjectAudioServer"
   }
 }
+
