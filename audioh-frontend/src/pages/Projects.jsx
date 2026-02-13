@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import QuickScribe from '../QuickScribe';
 import './Projects.css';
 import { Trash2 } from "lucide-react";
+import logo from '../assets/Logo_White.png';
 
 function Projects() {
   const [files, setFiles] = useState([]);
@@ -214,7 +215,7 @@ function Projects() {
   return (
     <div>
       <div className="logo-container">
-        <img src="src\assets\Logo_White.png" />
+        <img src={logo} alt="Logo" />
       </div>
       <div className="projects-container" >
 

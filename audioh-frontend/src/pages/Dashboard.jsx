@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './Dashboard.css'; // Assuming you have a CSS file for styling
 import '../App.css';
+import logo from '../assets/Logo_White.png';
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -138,7 +139,7 @@ const Dashboard = () => {
   return (
     <div className="dashboard" style={{ justifySelf: 'center' }}>
       <div className="header">
-        <img src="src\assets\Logo_White.png" />
+        <img src={logo} alt="Logo" />
         <div className="dash-header">
           <div className="user-info">
             <span >Welcome, {user}!</span>
