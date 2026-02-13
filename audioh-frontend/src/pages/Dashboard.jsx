@@ -34,7 +34,7 @@ const Dashboard = () => {
       setLoading(true);
       console.log('Loading projects for user ID:', userId);
 
-      const response = await axios.get(`http://localhost:8081/api/projects/user/${userId}`);
+      const response = await axios.get(`/api/projects/user/${userId}`);
 
       console.log('Raw response from backend:', response.data);
 
@@ -101,7 +101,7 @@ const Dashboard = () => {
         return;
       }
 
-      const response = await axios.post('http://localhost:8081/api/projects/create', {
+      const response = await axios.post('/api/projects/create', {
         userId: parseInt(userId),
         projectName: newProjectName
       });

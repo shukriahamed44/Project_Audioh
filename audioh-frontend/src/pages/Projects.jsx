@@ -37,7 +37,7 @@ function Projects() {
   const fetchExistingProjects = async (projectId) => {
     try {
       setLoading(true);
-      const response = await fetch(`http://localhost:8081/api/projects/${projectId}/files`);
+      const response = await fetch(`/api/projects/${projectId}/files`);
       if (!response.ok) {
         throw new Error('Failed to fetch projects');
       }
@@ -108,7 +108,7 @@ function Projects() {
     if (!noteText.trim()) return;
 
     try {
-      const response = await fetch(`http://localhost:8081/api/projects/file/${id}/notes`, {
+      const response = await fetch(`/api/projects/file/${id}/notes`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -136,7 +136,7 @@ function Projects() {
 
   const handleDeleteNote = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8081/api/projects/file/${id}/notes`, {
+      const response = await fetch(`/api/projects/file/${id}/notes`, {
         method: 'DELETE'
       });
 
@@ -161,7 +161,7 @@ function Projects() {
   // Function to save project file to backend
   const saveProjectFile = async (projectId, audioId, transcription) => {
     try {
-      const response = await fetch('http://localhost:8081/api/projects/add-file', {
+      const response = await fetch('/api/projects/add-file', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -188,7 +188,7 @@ function Projects() {
   // Function to delete project file from backend
   const deleteProjectFile = async (audioId) => {
     try {
-      const response = await fetch(`http://localhost:8081/api/projects/file/${audioId}`, {
+      const response = await fetch(`/api/projects/file/${audioId}`, {
         method: 'DELETE'
       });
 

@@ -18,7 +18,7 @@ const QuickScribe = ({ onAddFile }) => {
     formData.append('file', file);
 
     try {
-      const response = await axios.post('http://localhost:8081/api/transcribe', formData, {
+      const response = await axios.post('/api/transcribe', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         }
