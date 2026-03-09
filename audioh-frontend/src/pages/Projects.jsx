@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import QuickScribe from '../QuickScribe';
 import './Projects.css';
 import { Trash2 } from "lucide-react";
@@ -213,11 +214,16 @@ function Projects() {
   }
 
   return (
-    <div>
-      <div className="logo-container">
-        <img src={logo} alt="Logo" />
+    <div className="projects-wrapper">
+      {/* Top Header / Navigation */}
+      <div className="projects-glass-header">
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <Link to="/" className="btn-home-nav-inline" style={{ textDecoration: 'none' }}>← Home</Link>
+          <img src={logo} alt="Logo" className="projects-logo" />
+        </div>
       </div>
-      <div className="projects-container" >
+
+      <div className="projects-container">
 
         {/* Section 1: 25% width */}
         <div className="section-1">
@@ -229,6 +235,21 @@ function Projects() {
 
         {/* Section 2: 40% width */}
         <div className="section-2">
+
+          <div className="projects-utility-bar">
+            <div className="search-box">
+              <span style={{ marginRight: '10px' }}>🔍</span>
+              <input type="text" placeholder="Search files..." className="utility-input" />
+            </div>
+            <div className="filter-actions">
+              <select className="utility-select">
+                <option>Sort by: Newest</option>
+                <option>Sort by: Oldest</option>
+                <option>Sort by: Name</option>
+              </select>
+            </div>
+          </div>
+
           {files.length === 0 ? (
             <div className="no-files-message">
               No files added yet

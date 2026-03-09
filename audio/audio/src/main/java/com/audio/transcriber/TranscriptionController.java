@@ -31,37 +31,8 @@ import java.io.IOException;
 public class TranscriptionController {
     public final OpenAiAudioTranscriptionModel transcriptionModel;
 
-    // A Constructor
-    // Instantiates the API class/method w the api and parses it in to create a
-    // (transcriber)model(instance)
-    public TranscriptionController() {
-        // ApiKey apiKey = ApiKey.of(apikey);
-        ApiKey apiKey = new ApiKey() {
-            @Override
-            public String getValue() {
-                return "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";
-            }
-        };
-
-        // kinda initializing/ declaring the header, restClient builder and shi.
-        // here for the 4th parameter restClient, it needa be defined in a separate
-        // class (OpenAiConfig)
-        // Hardcoded API key here should be taken care of
-        HttpHeaders headers = new HttpHeaders();
-        RestClient.Builder restClientBuilder = RestClient.builder();
-        ResponseErrorHandler errorHandler = new DefaultResponseErrorHandler();
-        WebClient.Builder webClientBuilder = WebClient.builder();
-
-        OpenAiAudioApi openAiAudioApi = new OpenAiAudioApi(
-                "https://api.openai.com",
-                apiKey,
-                headers,
-                restClientBuilder,
-                webClientBuilder,
-                errorHandler
-
-        );
-        this.transcriptionModel = new OpenAiAudioTranscriptionModel(openAiAudioApi);
+    public TranscriptionController(OpenAiAudioTranscriptionModel transcriptionModel) {
+        this.transcriptionModel = transcriptionModel;
     }
 
     // RequestParam asks for a file to be uploaded(multipartfile keyword for

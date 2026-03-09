@@ -1,34 +1,39 @@
-// ./pages/Welcome.jsx
 import { Link } from 'react-router-dom';
 import React from 'react';
-import QuickScribe from '../QuickScribe';
-import './Welcome.css'; // Assuming you have a CSS file for styling
+import './Welcome.css';
 import logo from '../assets/Logo_White.png';
-
 
 function Welcome() {
     return (
-        <div className='welcome-container' >
-            {/* <div className='logo-container'> */}
-            <img src={logo} alt="Logo" />
-            {/* </div> */}
+        <div className="welcome-page-wrapper">
+            <div className="gradient-orb orb-1"></div>
+            <div className="gradient-orb orb-2"></div>
 
-            <p style={{ fontSize: '35px', marginTop: '0px', paddingTop: '0px', marginLeft: '100px' }}>Do more with your audio</p>
+            <div className='welcome-glass-card'>
+                <div className='welcome-content'>
+                    <img src={logo} alt="Logo" className="welcome-logo" />
+                    <h1 className="welcome-tagline">Do more with your audio</h1>
+                    <p className="welcome-subtext">Experience the next generation of audio intelligence.</p>
 
-            <div style={{ marginTop: '30px' }}>
-                <Link to="/login">
-                    <button style={{ margin: '10px', padding: '10px 20px', marginLeft: '100px' }}>Log in</button>
-                </Link>
+                    <div className="welcome-actions">
+                        <Link to="/login">
+                            <button className="btn-primary">Log in</button>
+                        </Link>
+                        <Link to="/register">
+                            <button className="btn-secondary">Register</button>
+                        </Link>
+                        <Link to="/quickscribe">
+                            <button className="btn-secondary">Try QuickScribe</button>
+                        </Link>
+                    </div>
 
-                <Link to="/register">
-                    <button style={{ margin: '10px', padding: '10px 20px' }}>Register</button>
-                </Link>
-                <><Link to="/quickscribe">
-                    <button style={{ margin: '10px', padding: '10px 20px' }}>QuickScribe_newchange </button>
-                </Link></>
+                    <div className="features-badge-row">
+                        <span className="feature-badge">Lightning Fast</span>
+                        <span className="feature-badge">AI Powered</span>
+                        <span className="feature-badge">Secure Storage</span>
+                    </div>
+                </div>
             </div>
-
-
         </div>
     );
 }

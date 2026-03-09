@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import './pages/Quickscribe.css';
 
 const QuickScribe = ({ onAddFile }) => {
   const [file, setFile] = useState(null);
@@ -53,7 +54,7 @@ const QuickScribe = ({ onAddFile }) => {
         <input type="file" accept="audio/*" onChange={handleFileChange} />
       </div>
       <button
-        className="upload-button"
+        className={`upload-button ${isTranscribing ? 'recording-pulse-active' : ''}`}
         onClick={handleUpload}
         disabled={!file || isTranscribing}
       >

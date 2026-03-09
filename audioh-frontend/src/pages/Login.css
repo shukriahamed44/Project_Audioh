@@ -1,77 +1,151 @@
+/* Login.css */
 .login-wrapper {
+  position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(55deg, #222222, #121212);
-  padding: 20px;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.login-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: 0;
+  opacity: 0.5;
+  animation: floatOrb 10s infinite ease-in-out alternate;
+  width: 50vh;
+  height: 50vh;
+  background: var(--accent-primary);
+  top: -10%;
+  right: -5%;
+}
+
+.login-glass-card {
+  position: relative;
+  z-index: 1;
+  width: 90%;
+  max-width: 450px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 50px 40px;
+  box-shadow: var(--glass-shadow);
+  display: flex;
+  flex-direction: column;
+  animation: fadeUp 0.6s ease-out forwards;
   box-sizing: border-box;
 }
 
-.login-card {
-  background: linear-gradient(55deg, #ff6f00, #ff4d00);
-  padding: 40px 30px;
-  border-radius: 16px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  width: 100%;
-  max-width: 400px;
+.login-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin: 0 0 30px 0;
   text-align: center;
-  border: 1px solid #333;
+  background: linear-gradient(135deg, #fff, var(--text-muted));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
-.login-title {
-  font-size: 1.8rem;
-  color: #ffffff;
-  margin-bottom: 24px;
-  font-weight: 600;
+.login-error,
+.login-success {
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 0.9rem;
+  text-align: center;
 }
 
 .login-error {
+  background: rgba(255, 77, 77, 0.1);
   color: #ff4d4d;
-  font-size: 0.9rem;
-  margin-bottom: 16px;
-  text-align: left;
+  border: 1px solid rgba(255, 77, 77, 0.2);
+}
+
+.login-success {
+  background: rgba(77, 255, 120, 0.1);
+  color: #4dff78;
+  border: 1px solid rgba(77, 255, 120, 0.2);
 }
 
 .login-form {
   display: flex;
   flex-direction: column;
+  gap: 20px;
 }
 
-.login-input {
-  padding: 14px;
-  margin-bottom: 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: #2d2d2d;
-  color: white;
-  font-size: 1rem;
+.glass-input {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 1.2em 1.5em;
+  border-radius: 50px;
+  color: var(--text-main);
+  font-family: inherit;
+  transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.glass-input:focus {
   outline: none;
-  transition: background-color 0.3s ease;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 15px rgba(255, 77, 0, 0.2);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.login-input::placeholder {
-  color: #aaaaaa;
+@keyframes floatOrb {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+
+  100% {
+    transform: translateY(-30px) scale(1.05);
+  }
 }
 
-.login-input:focus {
-  background-color: #333333;
-  box-shadow: 0 0 0 2px rgba(255, 87, 34, 0.3);
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.login-button {
-  padding: 14px;
-  background-color: #322787;
-  color: rgb(28, 28, 28);
-  border: none;
-  border-radius: 8px;
+.btn-home-nav {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-muted);
+  font-weight: 500;
   font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 10px 20px;
+  border-radius: 50px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+  text-decoration: none;
 }
 
-.login-button:hover {
-  background-color: #e64a19;
+.btn-home-nav:hover {
+  color: var(--text-main);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateX(-5px);
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import './Register.css';
-
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -34,11 +34,17 @@ const Register = () => {
   };
 
   return (
-    <div className='register-wrapper'>
-      <div className='register-card'>
-        <h2 className="register-title">Create new account</h2>
-        {error && <div>{error}</div>}
-        {success && <div>{success}</div>}
+    <div className='login-wrapper'>
+      {/* Floating Home Button */}
+      <Link to="/" className="btn-home-nav">
+        ← Home
+      </Link>
+
+      <div className="login-orb register-orb-pos"></div>
+      <div className='login-glass-card'>
+        <h2 className="login-title">Create Account</h2>
+        {error && <div className="login-error">{error}</div>}
+        {success && <div className="login-success">{success}</div>}
         <form onSubmit={handleSubmit} className="login-form">
           <input
             name="username"
@@ -46,6 +52,8 @@ const Register = () => {
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+            className="glass-input"
           />
           <input
             name="email"
@@ -53,6 +61,8 @@ const Register = () => {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
+            className="glass-input"
           />
           <input
             name="password"
@@ -60,9 +70,14 @@ const Register = () => {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+            className="glass-input"
           />
-          <button type="submit">R E G I S T E R</button>
+          <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>Register</button>
         </form>
+        <p style={{ textAlign: 'center', marginTop: '20px', color: 'var(--text-muted)' }}>
+          Already have an account? <Link to="/login" style={{ color: 'var(--accent-primary)', fontWeight: '600' }}>Log In</Link>
+        </p>
       </div>
     </div>
   );

@@ -76,7 +76,7 @@ pipeline {
                                 -e "dockerhub_password=${DOCKERHUB_CREDENTIALS_PSW} dockerhub_username=${DOCKERHUB_CREDENTIALS_USR}" \
                                 deploy.yml'''
                         }
-                    }
+                    }           
                 }
             }
         }

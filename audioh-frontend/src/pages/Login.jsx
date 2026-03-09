@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
-import './Login.css'; // Assuming you have a CSS file for styling
+import { useNavigate, Link } from 'react-router-dom';
+import './Login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -17,29 +17,31 @@ const Login = () => {
         password
       });
 
-      // Store user session with user ID from backend response // to proceed on with Welcome, ....thing* 
       localStorage.setItem('user', username);
 
-      // Get and store the actual user ID from backend
       if (response.data && response.data.userId) {
         localStorage.setItem('userId', response.data.userId.toString());
       } else {
-        //sendingn i n user id
         localStorage.setItem('userId');
       }
 
       navigate('/dashboard');
     } catch (err) {
-      // Better error handling - show actual error from server
       setError(err.response?.data || 'Login failed');
     }
   };
 
   return (
     <div className='login-wrapper'>
-      <div className='login-card'>
-        <h2 className='login-title'>Already have an account?</h2>
-        {error && <div className="login-error ">{error}</div>}
+      {/* Floating Home Button */}
+      <Link to="/" className="btn-home-nav">
+        ← Home
+      </Link>
+
+      <div className="login-orb"></div>
+      <div className='login-glass-card'>
+        <h2 className='login-title'>Welcome Back</h2>
+        {error && <div className="login-error">{error}</div>}
         <form onSubmit={handleSubmit} className="login-form">
           <input
             name="username"
@@ -48,6 +50,7 @@ const Login = () => {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
+            className="glass-input"
           />
           <input
             name="password"
@@ -56,9 +59,13 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="glass-input"
           />
-          <button type="submit">L O G I N</button>
+          <button type="submit" className="btn-primary" style={{ width: '100%', marginTop: '10px' }}>Log In</button>
         </form>
+        <p style={{ textAlign: 'center', marginTop: '20px', color: 'var(--text-muted)' }}>
+          Don't have an account? <Link to="/register" style={{ color: 'var(--accent-primary)', fontWeight: '600' }}>Register</Link>
+        </p>
       </div>
     </div>
   );

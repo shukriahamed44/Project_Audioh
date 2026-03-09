@@ -10,7 +10,7 @@ import Register from './pages/Register';
 import QuickscribePage from './pages/QuickscribePage';
 import Welcome from './pages/Welcome';
 import Projects from './pages/Projects';
-
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -29,7 +29,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/quickscribe" element={<QuickscribePage />} />
-        </Routes>    
+        </Routes>
+        <Footer />
       </div>
     </Router>
   )

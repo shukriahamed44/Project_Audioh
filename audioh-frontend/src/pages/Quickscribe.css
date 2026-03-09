@@ -1,14 +1,244 @@
-.quickscribe-page {
-    display: flex;
-    width: 92vw;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* Quickscribe.css */
+.quickscribe-page-wrapper {
+    position: relative;
+    width: 100vw;
     height: 100vh;
-    background-color: #1b1b1b;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background-color: transparent;
+}
+
+.qs-orb-1 {
+    background: var(--accent-secondary);
+    top: 10%;
+    left: -5%;
+    width: 60vh;
+    height: 60vh;
+}
+
+.qs-orb-2 {
+    background: var(--accent-primary);
+    bottom: 5%;
+    right: -5%;
+    width: 40vh;
+    height: 40vh;
+    animation-delay: -3s;
+}
+
+.quickscribe-layout-container {
+    display: flex;
+    gap: 40px;
+    z-index: 1;
+    width: 90%;
+    max-width: 1200px;
+    align-items: flex-start;
+}
+
+.quickscribe-context-panel {
+    flex: 0 0 300px;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 30px;
+    color: var(--text-main);
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+.quickscribe-context-panel h3 {
+    margin: 0 0 20px 0;
+    font-size: 1.1rem;
+    color: var(--text-muted);
+}
+
+.context-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.context-list li {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.context-list strong {
+    color: var(--accent-secondary);
+}
+
+.recent-log {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.log-item {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s;
+}
+
+.log-item:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateX(5px);
+}
+
+.log-icon {
+    width: 1.2rem;
+    height: 1.2rem;
+    object-fit: contain;
+}
+
+.log-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.log-details span {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.log-details small {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+}
+
+.quickscribe-glass-container {
+    flex: 1;
+    background: var(--glass-bg);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border);
+    border-radius: 32px;
     padding: 50px;
- 
-  
-  
-  
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.6s ease-out forwards;
+}
+
+/* QuickScribe inner component styling overrides */
+.Quickscribe-container {
+    background-color: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    height: auto !important;
+    min-height: 500px;
+}
+
+.Quickscribe-container h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0 0 30px 0;
+    text-align: center;
+    background: linear-gradient(135deg, #fff, var(--text-muted));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}
+
+.Quickscribe-container .file-input input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px dashed var(--glass-border);
+    padding: 2em 1.5em;
+    border-radius: 20px;
+    color: var(--text-main);
+    font-family: inherit;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+.Quickscribe-container .file-input input:hover {
+    border-color: rgba(255, 77, 0, 0.4);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.Quickscribe-container .upload-button {
+    background: linear-gradient(55deg, var(--accent-secondary), var(--accent-primary)) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.Quickscribe-container .upload-button:hover:not(:disabled) {
+    transform: translateY(-3px) !important;
+    box-shadow: 0 12px 30px rgba(255, 66, 94, 0.4) !important;
+    filter: brightness(1.1);
+}
+
+.Quickscribe-container .upload-button:disabled {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--text-muted) !important;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: none !important;
+}
+
+.Quickscribe-container .transcription-result {
+    margin-top: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 25px;
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+.Quickscribe-container .transcription-result h2 {
+    font-size: 1.2rem;
+    color: var(--accent-primary);
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.Quickscribe-container .transcription-result p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+    white-space: pre-wrap;
+}
+
+.recording-pulse-active {
+    animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite !important;
+}
+
+@keyframes pulse-ring {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 66, 94, 0.7) !important;
+    }
+
+    70% {
+        box-shadow: 0 0 0 15px rgba(255, 66, 94, 0) !important;
+    }
+
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 66, 94, 0) !important;
+    }
 }

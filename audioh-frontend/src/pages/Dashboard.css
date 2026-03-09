@@ -1,123 +1,207 @@
-.dashboard {
-  padding: 0px;
-  justify-items: center;
-  width: 90vw;
-  height: 90vh;
-  border-radius: 20px;
-  margin: 1px 10px 10px 50px;
-  background-color: #1c1c1c
+/* Dashboard.css */
+.dashboard-layout-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
-.header {
+.dashboard-main-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  width: 90vw;
-  height: 270px;
-  /* justify-content: space-between; */
-  border-radius: 20px;
-  background: linear-gradient(55deg, #ff6f00, #ff4d00);
-  
-  margin-bottom: 30px;
-  padding-bottom: 20px;
-  padding-top: 0px;
-  color: #1c1c1c;
-  img {
-    width: 260px;
-    height: auto;
-    margin-top: 35px;
-    padding-top: 0px;
-    margin-left: 50px;
-    justify-items: flex-start;
-  }
+  padding: 40px;
+  gap: 30px;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
-.dash-header {
+
+.dashboard-glass-header {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 24px 40px;
   display: flex;
-  flex-direction: row;
-  
-  padding: 0 50px;
-  margin-top: 20px;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--glass-shadow);
+}
+
+.dash-logo {
+  height: 50px;
+  width: auto;
+}
+
+.dash-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }
 
 .user-info {
-  display: flex;
-  align-items: center;
-  
-  margin-left: 0px;
-  font-size: 59px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-main);
 }
 
-.user-info span {
-  font-weight: bold;
+.btn-logout {
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  box-shadow: none;
+}
+
+.btn-logout:hover {
+  background: rgba(255, 66, 94, 0.1);
+  color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
+  box-shadow: none;
+  transform: translateY(-2px);
+}
+
+.quick-stats-row {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.stat-glass-card {
+  flex: 1;
+  min-width: 200px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat-glass-card h4 {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--text-main);
 }
 
 .projects-section {
-  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.projects-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.projects-title {
+  font-size: 2.5rem;
+  margin: 0;
+  background: linear-gradient(135deg, #fff, var(--text-muted));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
 }
 
 .create-project-form {
   display: flex;
-  gap: 10px;
-  margin-bottom: 30px;
+  gap: 15px;
   align-items: center;
 }
 
-.create-project-form input {
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  flex: 1;
+.glass-input {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 0.8em 1.5em;
+  border-radius: 50px;
+  color: var(--text-main);
+  font-family: inherit;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  min-width: 250px;
 }
 
-.create-project-form button {
-  padding: 10px 20px;
-  background: linear-gradient(55deg, #ff6f00, #ff4d00);
-  color: rgb(33, 33, 33);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.create-project-form button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.glass-input:focus {
+  outline: none;
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 10px rgba(255, 77, 0, 0.2);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
 }
 
-.project-card {
-  
-  border-radius: 10px;
-  padding: 20px;
-  background-color: #2e2e2e;
-  
+.project-glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 24px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: var(--glass-shadow);
+  min-height: 200px;
+  box-sizing: border-box;
 }
 
-.project-card h3 {
-  margin: 0 0 0px 0;
-  color: #ffffff;
-
+.project-glass-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  border-color: rgba(255, 77, 0, 0.3);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 77, 0, 0.1);
 }
 
-.project-card p {
-  margin: 0px 0;
-  color: #666;
-  font-size: 11px;
+.project-card-info h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.5rem;
+  color: #fff;
 }
 
-.project-card button {
-  margin-top: 10px;
-  padding: 8px 16px;
-  background: linear-gradient(55deg, #ff6f00, #ff4d00);
-  color: rgb(44, 44, 44);
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.project-card-info p {
+  margin: 0 0 20px 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
 }
 
-.project-card button:hover {
-  background-color: #0500a4;
+.empty-projects-state {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--glass-bg);
+  border-radius: 24px;
+  border: 1px dashed var(--glass-border);
+  color: var(--text-muted);
+}
+
+.btn-primary {
+  background: linear-gradient(55deg, var(--accent-secondary), var(--accent-primary)) !important;
+  color: #fff !important;
+  border: none !important;
+  box-shadow: 0 8px 25px rgba(255, 66, 94, 0.4) !important;
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: 0 12px 30px rgba(255, 66, 94, 0.6) !important;
+  filter: brightness(1.1);
 }
