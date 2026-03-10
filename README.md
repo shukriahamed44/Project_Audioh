@@ -11,7 +11,8 @@ The system is built on a decoupled architecture for maximum scalability and main
 *   **Database**: MySQL for robust data persistence (Users, Projects, Audio Metadata, and Notes).
 *   **AI Integration**: Spring AI framework directly interfacing with the OpenAI API for seamless audio streaming and transcription.
 
-For a detailed visual representation, please refer to the `architecture_diagram.md` file.
+<img width="4717" height="3145" alt="in_3" src="https://github.com/user-attachments/assets/bbc790c7-8af1-46d6-8532-5bcf1e6251fd" />
+
 
 ## Key Features
 
