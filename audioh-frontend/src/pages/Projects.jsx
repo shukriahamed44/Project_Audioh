@@ -238,7 +238,7 @@ function Projects() {
 
           <div className="projects-utility-bar">
             <div className="search-box">
-              <span style={{ marginRight: '10px' }}>🔍</span>
+              <span style={{ marginRight: '10px' }}></span>
               <input type="text" placeholder="Search files..." className="utility-input" />
             </div>
             <div className="filter-actions">

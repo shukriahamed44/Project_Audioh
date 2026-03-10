@@ -46,8 +46,20 @@ public class TranscriptionController {
     @PostMapping
     public ResponseEntity<String> transcribeAudio(
             @RequestParam("file") MultipartFile file) throws IOException {
-        File tempFile = File.createTempFile("audio", ".wav");
-        file.transferTo(tempFile);
+        String originalFilename = file.getOriginalFilename();
+        String extension = ".wav";
+        if (originalFilename != null && originalFilename.contains(".")) {
+            extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+        }
+
+        System.out.println(
+                "[TRANSCRIPTION] Received file: " + originalFilename + " | size: " + file.getSize() + " bytes");
+
+        File tempFile = File.createTempFile("audio", extension);
+        tempFile.delete(); // delete the empty file so copy can write fresh
+        java.nio.file.Files.copy(file.getInputStream(), tempFile.toPath());
+
+        System.out.println("[TRANSCRIPTION] Temp file size: " + tempFile.length() + " bytes");
 
         OpenAiAudioTranscriptionOptions transcriptionOptions = OpenAiAudioTranscriptionOptions.builder()
                 .responseFormat(OpenAiAudioApi.TranscriptResponseFormat.TEXT)
@@ -59,8 +71,12 @@ public class TranscriptionController {
         AudioTranscriptionPrompt transcriptionRequest = new AudioTranscriptionPrompt(audioFile, transcriptionOptions);
         AudioTranscriptionResponse response = transcriptionModel.call(transcriptionRequest);
 
+        String output = response.getResult().getOutput();
+        System.out.println("[TRANSCRIPTION] Output length: " + (output != null ? output.length() : "null"));
+        System.out.println("[TRANSCRIPTION] Output: " + output);
+
         tempFile.delete();
-        return new ResponseEntity<>(response.getResult().getOutput(), HttpStatus.OK);
+        return new ResponseEntity<>(output, HttpStatus.OK);
 
     }
 

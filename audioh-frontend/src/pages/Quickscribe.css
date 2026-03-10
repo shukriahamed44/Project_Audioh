@@ -218,11 +218,103 @@
     margin-bottom: 15px;
 }
 
-.Quickscribe-container .transcription-result p {
+.Quickscribe-container .transcription-result p,
+.Quickscribe-container .transcription-text-reveal {
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.8;
     margin: 0;
     white-space: pre-wrap;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Individual word animation */
+.reveal-word {
+    display: inline;
+    transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease;
+}
+
+.word-hidden {
+    opacity: 0;
+    filter: blur(4px);
+    transform: translateY(4px);
+}
+
+.word-visible {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+}
+
+/* Gradient shimmer wave during reveal */
+.transcription-text-reveal.is-revealing::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 77, 0, 0.06),
+            rgba(255, 66, 94, 0.1),
+            rgba(255, 77, 0, 0.06),
+            transparent);
+    animation: shimmer-wave 5s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+    border-radius: 16px;
+}
+
+/* Subtle glow on the bottom edge during reveal */
+.transcription-text-reveal.is-revealing::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent-secondary), var(--accent-primary), transparent);
+    animation: glow-sweep 5.5s ease-in-out infinite;
+    opacity: 0.6;
+    z-index: 1;
+}
+
+/* When reveal is done, fade out all effects */
+.transcription-text-reveal.reveal-done::before,
+.transcription-text-reveal.reveal-done::after {
+    animation: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+@keyframes shimmer-wave {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 200%;
+    }
+}
+
+@keyframes glow-sweep {
+    0% {
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: left;
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scaleX(1);
+    }
+
+    100% {
+        opacity: 0;
+        transform: scaleX(0);
+        transform-origin: right;
+    }
 }
 
 .recording-pulse-active {
